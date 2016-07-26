@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -7,22 +8,37 @@ public class Calculator {
     public double readInput(String exp) {
         Scanner input = new Scanner(exp);
 
+        //input.useLocale(Locale.US);
+
         Stack<Double> number = new Stack<Double>();
         Stack<String> operator = new Stack<String>();
 
-        while (input.hasNext()) {
-            token = input.next();
+        token = input.next();
 
-            if (isNumber(token)) {
-                number.push(Double.parseDouble(token));
-                System.out.println(number);
+        String[] array = token.split("");
+
+        for (int i = 0; i < array.length; i++) {
+
+            if (isNumber(array[i])) {
+                double numDouble = Double.parseDouble(array[i]);
+                number.push(numDouble);
             }
-            else if (token.equals("+")) {
-                operator.push(token);
-                System.out.println(operator);
+            else if (isOperator(array[i])) {
+                operator.push(array[i]);
             }
+            //System.out.println(array[i]);
         }
-        return number.pop();
+
+        return evaluate(operator.pop(), number.pop(), number.pop());
+    }
+
+
+    public double evaluate(String op, double num2, double num1) {
+        //double sum = 0;
+        if (op.equals("+")) {
+            num1 = num1 + num2;
+        }
+        return num1;
     }
 
     public boolean isOperator(String exp) {

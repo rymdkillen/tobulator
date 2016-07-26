@@ -7,6 +7,6 @@ public class Main {
         Calculator calculate = new Calculator();
 
         String input = scanner.nextLine();
-        calculate.readInput(input);
+        System.out.println(calculate.readInput(input));
     }
 }
