@@ -13,9 +13,9 @@ public class Calculator {
         Stack<Double> number = new Stack<Double>();
         Stack<String> operator = new Stack<String>();
 
-        token = input.next();
+        token = input.nextLine();
 
-        String[] array = token.split("");
+        String[] array = token.split("\\s+");
 
         for (int i = 0; i < array.length; i++) {
 
@@ -32,17 +32,22 @@ public class Calculator {
         return evaluate(operator.pop(), number.pop(), number.pop());
     }
 
-
     public double evaluate(String op, double num2, double num1) {
         //double sum = 0;
         if (op.equals("+")) {
             num1 = num1 + num2;
+        }
+        else if (op.equals("-")) {
+            num1 = num1 - num2;
         }
         return num1;
     }
 
     public boolean isOperator(String exp) {
         if (exp.equals("+")) {
+            return true;
+        }
+        else if (exp.equals("-")) {
             return true;
         }
         else {
