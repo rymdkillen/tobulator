@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println("What do want to calculate?");
+        System.out.println("What do you want to calculate?");
 
         Scanner inputScanner = new Scanner(System.in);
         Calculator calculator = new Calculator();
