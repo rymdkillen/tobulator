@@ -4,44 +4,41 @@ import java.util.Stack;
 public class Calculator {
     private String token = "";
 
-    public double readInput(String exp) {
-        Scanner input = new Scanner(exp);
-        //double sum = 0;
+    public double calculateInput(String userInput) {
+        Scanner input = new Scanner(userInput);
 
-        Stack<Double> number = new Stack<>();
-        Stack<String> operator = new Stack<>();
+        Stack<Double> numbers = new Stack<>();
+        Stack<String> operators = new Stack<>();
 
         token = input.nextLine();
+        String[] tokens = token.split("\\s+");
 
-        String[] array = token.split("\\s+");
-
-        for (int i = 0; i < array.length; i++) {
-
-            if (isNumber(array[i])) {
-                double numDouble = Double.parseDouble(array[i]);
-                number.push(numDouble);
+        for (int i = 0; i < tokens.length; i++) {
+            if (isNumber(tokens[i])) {
+                double numDouble = Double.parseDouble(tokens[i]);
+                numbers.push(numDouble);
             }
-            else if (isOperator(array[i])) {
-                operator.push(array[i]);
+            else if (isOperator(tokens[i])) {
+                operators.push(tokens[i]);
             }
             else {
-                System.out.println("De där va ju inge nummer");
+                System.out.println("That was not a number!");
             }
         }
-        return evaluate(operator.pop(), number.pop(), number.pop());
+        return evaluate(operators.pop(), numbers.pop(), numbers.pop());
     }
 
-    public boolean isOperator(String exp) {
-        if (exp.equals("+")) {
+    public boolean isOperator(String operator) {
+        if (operator.equals("+")) {
             return true;
         }
-        else if (exp.equals("-")) {
+        else if (operator.equals("-")) {
             return true;
         }
-        else if (exp.equals("*")) {
+        else if (operator.equals("*")) {
             return true;
         }
-        else if (exp.equals("/")) {
+        else if (operator.equals("/")) {
             return true;
         }
         else {
@@ -49,9 +46,10 @@ public class Calculator {
         }
     }
 
-    public boolean isNumber(String exp) {
+    // Why am I using try catch here?
+    public boolean isNumber(String number) {
         try {
-            Double.parseDouble(exp);
+            Double.parseDouble(number);
             return true;
         }
         catch (NumberFormatException e) {
@@ -61,6 +59,7 @@ public class Calculator {
 
     public double evaluate(String op, double num2, double num1) {
         double sum = 0;
+
         if (op.equals("+")) {
             sum = num1 + num2;
         }
