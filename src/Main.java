@@ -7,6 +7,14 @@ public class Main {
         Calculator calculate = new Calculator();
 
         String input = scanner.nextLine();
-        System.out.println(calculate.readInput(input));
+
+        try {
+            System.out.println(calculate.readInput(input));
+        }
+        catch (Exception e) {
+            System.out.println("Hörrudu bosse, redär fåru göra om");
+        }
+
+
     }
 }
