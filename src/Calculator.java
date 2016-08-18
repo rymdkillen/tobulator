@@ -25,6 +25,11 @@ public class Calculator {
                 System.out.println("That was not a number!");
             }
         }
+
+        while (operators.size() > 1) {
+            numbers.push(evaluate(operators.pop(), numbers.pop(), numbers.pop()));
+        }
+
         return evaluate(operators.pop(), numbers.pop(), numbers.pop());
     }
 
